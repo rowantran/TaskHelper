@@ -91,8 +91,6 @@ public class MainActivity extends AppCompatActivity implements AddTaskDialogFrag
         switch (item.getItemId()) {
             case R.id.action_add_task:
                 showAddTaskFragment(null, -1);
-            case R.id.action_settings:
-                return true;
             default:
                 return super.onOptionsItemSelected(item);
         }

@@ -5,8 +5,4 @@
         android:icon="@drawable/ic_add_white_24dp"
         android:title="@string/action_add_task"
         app:showAsAction="ifRoom" />
-    <item android:id="@+id/action_settings"
-        android:title="@string/action_settings"
-        android:icon="@drawable/ic_settings_white_24dp"
-        app:showAsAction="ifRoom"/>
 </menu>
