@@ -26,16 +26,24 @@ public class AddTaskDialogFragment extends DialogFragment {
 
     public AddTaskDialogFragment() {}
 
-    public static AddTaskDialogFragment newInstance(String title) {
+    public static AddTaskDialogFragment newInstance(@Nullable Task task, int pos) {
+        // If editing pass Task to be edited and its position, otherwise pass null and any int
+
         AddTaskDialogFragment frag = new AddTaskDialogFragment();
-        Bundle args = new Bundle();
-        args.putString("title", title);
+        Bundle args = null;
+        if (task != null) {
+            args = new Bundle();
+            args.putString("body", task.body);
+            args.putInt("priority", task.priority);
+            args.putLong("date", task.date);
+            args.putInt("pos", pos);
+        }
 
         frag.setArguments(args);
         return frag;
     }
 
-    public void onAddItem(View v) {
+    public void onAddItem(View v, boolean editing, int pos) {
         String taskBody = etBody.getText().toString();
         int taskPriorityID = radioGroupPriority.getCheckedRadioButtonId();
 
@@ -52,7 +60,7 @@ public class AddTaskDialogFragment extends DialogFragment {
 
         newTask.date = getUnixTimeFromDatePicker(dpDate);
 
-        listener.onTaskAdded(newTask);
+        listener.onTaskAdded(newTask, editing, pos);
         dismiss();
     }
 
@@ -99,21 +107,51 @@ public class AddTaskDialogFragment extends DialogFragment {
         radioGroupPriority = (RadioGroup) view.findViewById(R.id.radiogroup_priority);
         dpDate = (DatePicker) view.findViewById(R.id.dp_date);
 
-        String title = getArguments().getString("title", "Add Task");
-        getDialog().setTitle(title);
+        Bundle args = getArguments();
+        if (args != null) {
+            getDialog().setTitle(R.string.fragment_edit_task);
+            btnAddTask.setText(R.string.btn_edit_task);
+
+            String body = args.getString("body");
+            etBody.setText(body);
+
+            int priority = args.getInt("priority");
+            if (priority == 0) {
+                radioGroupPriority.check(R.id.radio_low);
+            } else if (priority == 1) {
+                radioGroupPriority.check(R.id.radio_medium);
+            } else {
+                radioGroupPriority.check(R.id.radio_high);
+            }
+
+            long date = args.getLong("date") * 1000;
+            Calendar calendar = Calendar.getInstance();
+            calendar.setTimeInMillis(date);
+            dpDate.updateDate(calendar.get(Calendar.YEAR), calendar.get(Calendar.MONTH),
+                    calendar.get(Calendar.DAY_OF_MONTH));
+
+            final int pos = args.getInt("pos");
+
+            btnAddTask.setOnClickListener(new View.OnClickListener() {
+                public void onClick(View v) {
+                    onAddItem(v, true, pos);
+                }
+            });
+        } else {
+            getDialog().setTitle(R.string.fragment_add_task);
+            btnAddTask.setOnClickListener(new View.OnClickListener() {
+                public void onClick(View v) {
+                    onAddItem(v, false, -1);
+                }
+            });
+        }
 
         etBody.requestFocus();
         getDialog().getWindow().setSoftInputMode(
                 WindowManager.LayoutParams.SOFT_INPUT_STATE_VISIBLE);
-
-        btnAddTask.setOnClickListener(new View.OnClickListener() {
-            public void onClick(View v) {
-                onAddItem(v);
-            }
-        });
     }
 
     public interface OnTaskAddedListener {
-        public void onTaskAdded(Task task);
+        public void onTaskAdded(Task task, boolean editing, int pos);
     }
 }

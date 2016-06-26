@@ -1,6 +1,7 @@
 package com.codepath.todoapp;
 
 import android.os.Bundle;
+import android.support.annotation.Nullable;
 import android.support.v4.app.FragmentManager;
 import android.support.v7.app.AppCompatActivity;
 import android.view.Menu;
@@ -34,8 +35,13 @@ public class MainActivity extends AppCompatActivity implements AddTaskDialogFrag
         setupListViewListener();
     }
 
-    public void onTaskAdded(Task task) {
-        itemsAdapter.add(task);
+    public void onTaskAdded(Task task, boolean editing, int pos) {
+        if (editing) {
+            tasks.set(pos, task);
+            itemsAdapter.notifyDataSetChanged();
+        } else {
+            itemsAdapter.add(task);
+        }
 
         dbHelper.updateTasks(tasks);
     }
@@ -55,11 +61,22 @@ public class MainActivity extends AppCompatActivity implements AddTaskDialogFrag
                     }
                 }
         );
+        lvItems.setOnItemClickListener(
+                new AdapterView.OnItemClickListener() {
+                    @Override
+                    public void onItemClick(AdapterView<?> adapter, View item, int pos, long id) {
+                        showAddTaskFragment((Task) lvItems.getItemAtPosition(pos), pos);
+                        itemsAdapter.notifyDataSetChanged();
+
+                        dbHelper.updateTasks(tasks);
+                    }
+                }
+        );
     }
 
-    private void showAddTaskFragment() {
+    private void showAddTaskFragment(@Nullable Task task, int pos) {
         FragmentManager fm = getSupportFragmentManager();
-        AddTaskDialogFragment addTaskDialogFragment = AddTaskDialogFragment.newInstance("Add task");
+        AddTaskDialogFragment addTaskDialogFragment = AddTaskDialogFragment.newInstance(task, pos);
         addTaskDialogFragment.show(fm, "fragment_add_task");
     }
 
@@ -73,7 +90,7 @@ public class MainActivity extends AppCompatActivity implements AddTaskDialogFrag
     public boolean onOptionsItemSelected(MenuItem item) {
         switch (item.getItemId()) {
             case R.id.action_add_task:
-                showAddTaskFragment();
+                showAddTaskFragment(null, -1);
             case R.id.action_settings:
                 return true;
             default:

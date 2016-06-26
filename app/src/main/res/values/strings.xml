@@ -5,7 +5,11 @@
 
     <string name="et_body_hint">Enter a description</string>
     <string name="btn_add_task">Add task</string>
+    <string name="btn_edit_task">Save task</string>
     <string name="radio_low">Low</string>
     <string name="radio_medium">Medium</string>
     <string name="radio_high">High</string>
+
+    <string name="fragment_add_task">Add task</string>
+    <string name="fragment_edit_task">Edit task</string>
 </resources>
