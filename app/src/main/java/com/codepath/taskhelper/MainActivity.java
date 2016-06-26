@@ -1,9 +1,12 @@
 package com.codepath.taskhelper;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
+import android.support.design.widget.FloatingActionButton;
 import android.support.v4.app.FragmentManager;
 import android.support.v7.app.AppCompatActivity;
+import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
@@ -32,7 +35,11 @@ public class MainActivity extends AppCompatActivity implements AddTaskDialogFrag
         itemsAdapter = new TasksAdapter(getApplicationContext(), tasks);
         lvItems.setAdapter(itemsAdapter);
 
+        Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
+        setSupportActionBar(toolbar);
+
         setupListViewListener();
+        setupFABListener();
     }
 
     public void onTaskAdded(Task task, boolean editing, int pos) {
@@ -74,6 +81,16 @@ public class MainActivity extends AppCompatActivity implements AddTaskDialogFrag
         );
     }
 
+    private void setupFABListener() {
+        FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fab);
+        fab.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                showAddTaskFragment(null, -1);
+            }
+        });
+    }
+
     private void showAddTaskFragment(@Nullable Task task, int pos) {
         FragmentManager fm = getSupportFragmentManager();
         AddTaskDialogFragment addTaskDialogFragment = AddTaskDialogFragment.newInstance(task, pos);
@@ -89,8 +106,10 @@ public class MainActivity extends AppCompatActivity implements AddTaskDialogFrag
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
         switch (item.getItemId()) {
-            case R.id.action_add_task:
-                showAddTaskFragment(null, -1);
+            case R.id.action_settings:
+                Intent intent = new Intent(getApplicationContext(), SettingsActivity.class);
+                startActivity(intent);
+                return true;
             default:
                 return super.onOptionsItemSelected(item);
         }
