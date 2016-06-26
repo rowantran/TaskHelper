@@ -64,8 +64,9 @@ public class AddTaskDialogFragment extends DialogFragment {
         Calendar calendar = Calendar.getInstance();
         calendar.set(year, month, day);
 
-        // Convert getTimeInMillis() to Unix time
-        return calendar.getTimeInMillis() / 1000;
+        long unix = calendar.getTimeInMillis() / 1000;
+
+        return unix;
     }
 
     @Override
