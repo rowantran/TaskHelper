@@ -1,4 +1,4 @@
-package com.codepath.todoapp;
+package com.codepath.taskhelper;
 
 import android.os.Bundle;
 import android.support.annotation.Nullable;

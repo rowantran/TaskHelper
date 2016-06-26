@@ -1,4 +1,4 @@
-package com.codepath.todoapp;
+package com.codepath.taskhelper;
 
 public class Task {
     public String body;
