@@ -14,4 +14,7 @@
     <string name="fragment_add_task">Add task</string>
     <string name="fragment_edit_task">Edit task</string>
     <string name="title_activity_settings">Settings</string>
+
+    <string name="pref_sortingOrder">Sort order</string>
+    <string name="pref_sortingOrderDefault">0</string>
 </resources>
