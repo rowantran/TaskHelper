@@ -9,9 +9,11 @@ import android.widget.ArrayAdapter;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import java.util.Date;
 import java.util.List;
 
 public class TasksAdapter extends ArrayAdapter<Task> {
+    static final int SECONDS_PER_DAY = 86400;
     Context context;
 
     public TasksAdapter(Context context, List<Task> tasks) {
@@ -39,6 +41,23 @@ public class TasksAdapter extends ArrayAdapter<Task> {
             drawableID = R.drawable.priority_high;
         }
         ivPriority.setImageDrawable(ContextCompat.getDrawable(context, drawableID));
+
+        long currentTime = new Date().getTime() / 1000;
+        long timeDifference = currentTime - task.date;
+        String dateMessage;
+        if (timeDifference < 0) {
+            dateMessage = "Past due date!";
+        } else {
+            if (timeDifference / SECONDS_PER_DAY <= 1) {
+                dateMessage = "Due today!";
+            } else {
+                double daysDue = timeDifference / SECONDS_PER_DAY;
+                dateMessage = "Due in " + String.valueOf((int) daysDue) + " days";
+            }
+        }
+
+        TextView tvDue = (TextView) convertView.findViewById(R.id.tv_due);
+        tvDue.setText(dateMessage);
 
         return convertView;
     }
