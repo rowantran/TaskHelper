@@ -6,7 +6,7 @@
         <item>Priority (ascending) </item>
     </string-array>
     <string-array name="sortingValues">
-        <item>0</item>
-        <item>1</item>
+        <item>descending</item>
+        <item>ascending</item>
     </string-array>
 </resources>

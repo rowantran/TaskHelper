@@ -7,8 +7,6 @@ public class SettingsFragment extends PreferenceFragment {
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-
-        setHasOptionsMenu(true);
         addPreferencesFromResource(R.xml.preferences);
     }
 }

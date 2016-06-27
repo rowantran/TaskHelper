@@ -1,7 +1,9 @@
 package com.codepath.taskhelper;
 
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
+import android.preference.PreferenceManager;
 import android.support.annotation.Nullable;
 import android.support.design.widget.FloatingActionButton;
 import android.support.v4.app.FragmentManager;
@@ -13,10 +15,12 @@ import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ListView;
 
+import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 
 public class MainActivity extends AppCompatActivity implements AddTaskDialogFragment.OnTaskAddedListener {
-    List<Task> tasks;
+    List<Task> tasks = new ArrayList<>();
     TasksAdapter itemsAdapter;
     ListView lvItems;
 
@@ -40,17 +44,37 @@ public class MainActivity extends AppCompatActivity implements AddTaskDialogFrag
 
         setupListViewListener();
         setupFABListener();
+
+    }
+
+    @Override
+    public void onResume() {
+        super.onResume();
+        sortTasksBasedOnPreferences(tasks);
+        itemsAdapter.notifyDataSetChanged();
     }
 
     public void onTaskAdded(Task task, boolean editing, int pos) {
         if (editing) {
             tasks.set(pos, task);
-            itemsAdapter.notifyDataSetChanged();
         } else {
-            itemsAdapter.add(task);
+            tasks.add(task);
         }
 
+        sortTasksBasedOnPreferences(tasks);
+
+        itemsAdapter.notifyDataSetChanged();
         dbHelper.updateTasks(tasks);
+    }
+
+    private void sortTasksBasedOnPreferences(List<Task> tasks) {
+        Collections.sort(tasks, new TasksComparator());
+
+        SharedPreferences preferences = PreferenceManager.getDefaultSharedPreferences(
+                getApplicationContext());
+        if (preferences.getString("pref_sortingOrder", "descending").equals("descending")) {
+            Collections.reverse(tasks);
+        }
     }
 
     private void setupListViewListener() {
