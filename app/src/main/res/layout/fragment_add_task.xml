@@ -38,6 +38,7 @@
             android:layout_height="wrap_content"
             android:text="@string/radio_low"
             android:id="@+id/radio_low"
+            android:buttonTint="@color/colorPriorityLow"
             android:checked="false" />
 
         <RadioButton
@@ -45,6 +46,7 @@
             android:layout_height="wrap_content"
             android:text="@string/radio_medium"
             android:id="@+id/radio_medium"
+            android:buttonTint="@color/colorPriorityMedium"
             android:checked="true" />
 
         <RadioButton
@@ -52,6 +54,7 @@
             android:layout_height="wrap_content"
             android:text="@string/radio_high"
             android:id="@+id/radio_high"
+            android:buttonTint="@color/colorPriorityHigh"
             android:checked="false" />
 
     </RadioGroup>

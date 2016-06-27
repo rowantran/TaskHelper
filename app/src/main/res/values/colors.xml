@@ -4,4 +4,8 @@
     <color name="colorPrimaryDark">#303F9F</color>
     <color name="colorAccent">#FF4081</color>
     <color name="colorBackground">#ecf0f1</color>
+
+    <color name="colorPriorityLow">#2ecc71</color>
+    <color name="colorPriorityMedium">#f1c40f</color>
+    <color name="colorPriorityHigh">#e74c3c</color>
 </resources>
