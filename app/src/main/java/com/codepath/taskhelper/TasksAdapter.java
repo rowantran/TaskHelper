@@ -43,7 +43,7 @@ public class TasksAdapter extends ArrayAdapter<Task> {
         ivPriority.setImageDrawable(ContextCompat.getDrawable(context, drawableID));
 
         long currentTime = new Date().getTime() / 1000;
-        long timeDifference = currentTime - task.date;
+        long timeDifference = task.date - currentTime;
         String dateMessage;
         if (timeDifference < 0) {
             dateMessage = "Past due date!";
