@@ -1,6 +1,6 @@
 # Pre-work - Task Helper
 
-TaskHelper is an android app that allows building a todo list and basic todo items management functionality including adding new items, editing and deleting an existing item.
+Task Helper is an android app that allows building a todo list and basic todo items management functionality including adding new items, editing and deleting an existing item.
 
 Submitted by: Rowan-James Tran
 
@@ -26,6 +26,7 @@ The following **optional** features are implemented:
 The following **additional** features are implemented:
 
 * [x] List anything else that you can get done to improve the app functionality!
+
 When selecting priority while creating tasks, radio buttons are colored to match the priority icons in the main view.
 Tasks with the same priority are sorted based on due date.
 Users can choose to sort by ascending or descending priority.
@@ -34,7 +35,7 @@ Users can choose to sort by ascending or descending priority.
 
 Here's a walkthrough of implemented user stories:
 
-<img src='http://i.imgur.com/link/to/your/gif/file.gif' title='Video Walkthrough' width='' alt='Video Walkthrough' />
+<img src='http://i.imgur.com/BL5ViWC.gifv' title='Video Walkthrough' width='' alt='Video Walkthrough' />
 
 GIF created with [LiceCap](http://www.cockos.com/licecap/).
 
