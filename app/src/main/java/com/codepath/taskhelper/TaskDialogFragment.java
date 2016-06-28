@@ -16,6 +16,11 @@ import android.widget.RadioGroup;
 
 import java.util.Calendar;
 
+/**
+ * TaskDialogFragment is used to either add or edit tasks.
+ *
+ * This fragment is accessed
+ */
 public class TaskDialogFragment extends DialogFragment {
     private EditText etBody;
     private Button btnAddTask;

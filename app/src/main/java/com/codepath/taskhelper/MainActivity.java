@@ -19,10 +19,11 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 
-/*
-    MainActivity displays all existing tasks and allows users to create new ones.
+/**
+ * MainActivity displays all existing tasks and allows users to create new ones.
+ *
+ * @author Rowan-James Tran
  */
-
 public class MainActivity extends AppCompatActivity implements TaskDialogFragment.OnTaskAddedListener {
     List<Task> tasks = new ArrayList<>();
     TasksAdapter itemsAdapter;

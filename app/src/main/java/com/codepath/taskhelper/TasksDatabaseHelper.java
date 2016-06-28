@@ -9,6 +9,13 @@ import android.database.sqlite.SQLiteOpenHelper;
 import java.util.ArrayList;
 import java.util.List;
 
+/**
+ * TasksDatabaseHelper provides an interface to the SQLite database.
+ *
+ * The two main functions are used to write the list of Tasks to the database and read the list.
+ *
+ * @author Rowan-James Tran
+ */
 public class TasksDatabaseHelper extends SQLiteOpenHelper {
     private static TasksDatabaseHelper singleton;
 

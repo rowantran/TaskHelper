@@ -12,6 +12,15 @@ import android.widget.TextView;
 import java.util.Calendar;
 import java.util.List;
 
+/**
+ * TasksAdapter extends ArrayAdapter and converts a List of Tasks into a ListView.
+ *
+ * The body of each task is displayed on the left side of the list element.
+ * On the right side of each element, the time left to complete the task is displayed, along with
+ * a colored circle to represent the priority of the task.
+ *
+ * @author Rowan-James Tran
+ */
 public class TasksAdapter extends ArrayAdapter<Task> {
     static final int SECONDS_PER_DAY = 86400;
     Context context;

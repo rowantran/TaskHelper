@@ -2,6 +2,15 @@ package com.codepath.taskhelper;
 
 import java.util.Comparator;
 
+/**
+ * TasksComparator compares two Tasks.
+ *
+ * The Tasks are first sorted by their priority, going from lowest priority to highest.
+ * In the event that two Tasks have the same priority, they are sorted from latest to earliest
+ * due date.
+ *
+ * @Author Rowan-James Tran
+ */
 public class TasksComparator implements Comparator<Task> {
     @Override
     public int compare(Task task1, Task task2) {
