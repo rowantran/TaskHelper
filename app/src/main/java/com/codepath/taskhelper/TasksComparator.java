@@ -13,7 +13,13 @@ public class TasksComparator implements Comparator<Task> {
         } else if (priority1 < priority2) {
             return -1;
         } else {
-            return 0;
+            if (task1.date < task2.date) {
+                return 1;
+            } else if (task1.date > task2.date) {
+                return -1;
+            } else {
+                return 0;
+            }
         }
     }
 }
