@@ -9,7 +9,7 @@ import android.widget.ArrayAdapter;
 import android.widget.ImageView;
 import android.widget.TextView;
 
-import java.util.Date;
+import java.util.Calendar;
 import java.util.List;
 
 public class TasksAdapter extends ArrayAdapter<Task> {
@@ -42,14 +42,24 @@ public class TasksAdapter extends ArrayAdapter<Task> {
         }
         ivPriority.setImageDrawable(ContextCompat.getDrawable(context, drawableID));
 
-        long currentTime = new Date().getTime() / 1000;
+        Calendar currentCal = Calendar.getInstance();
+
+        // Allow user until end of day
+        currentCal.set(Calendar.HOUR_OF_DAY, 23);
+        currentCal.set(Calendar.MINUTE, 59);
+        currentCal.set(Calendar.SECOND, 59);
+        long currentTime = currentCal.getTimeInMillis() / 1000;
+
         long timeDifference = task.date - currentTime;
+        System.out.println(timeDifference);
         String dateMessage;
         if (timeDifference < 0) {
             dateMessage = "Past due date!";
         } else {
-            if (timeDifference / SECONDS_PER_DAY <= 1) {
+            if ((timeDifference / SECONDS_PER_DAY) < 1) {
                 dateMessage = "Due today!";
+            } else if ((timeDifference / SECONDS_PER_DAY) == 1) {
+                dateMessage = "Due tomorrow!";
             } else {
                 double daysDue = timeDifference / SECONDS_PER_DAY;
                 dateMessage = "Due in " + String.valueOf((int) daysDue) + " days";

@@ -70,7 +70,9 @@ public class AddTaskDialogFragment extends DialogFragment {
         int year = dp.getYear();
 
         Calendar calendar = Calendar.getInstance();
-        calendar.set(year, month, day);
+
+        // Allow user until end of day
+        calendar.set(year, month, day, 23, 59, 59);
 
         long unix = calendar.getTimeInMillis() / 1000;
 
