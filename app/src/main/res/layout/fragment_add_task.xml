@@ -10,6 +10,7 @@
         android:id="@+id/et_body"
         android:inputType="text"
         android:imeOptions="actionDone"
+        android:maxLength="30"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:hint="@string/et_body_hint"

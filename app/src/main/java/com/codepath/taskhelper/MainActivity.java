@@ -19,7 +19,11 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 
-public class MainActivity extends AppCompatActivity implements AddTaskDialogFragment.OnTaskAddedListener {
+/*
+    MainActivity displays all existing tasks and allows users to create new ones.
+ */
+
+public class MainActivity extends AppCompatActivity implements TaskDialogFragment.OnTaskAddedListener {
     List<Task> tasks = new ArrayList<>();
     TasksAdapter itemsAdapter;
     ListView lvItems;
@@ -117,7 +121,7 @@ public class MainActivity extends AppCompatActivity implements AddTaskDialogFrag
 
     private void showAddTaskFragment(@Nullable Task task, int pos) {
         FragmentManager fm = getSupportFragmentManager();
-        AddTaskDialogFragment addTaskDialogFragment = AddTaskDialogFragment.newInstance(task, pos);
+        TaskDialogFragment addTaskDialogFragment = TaskDialogFragment.newInstance(task, pos);
         addTaskDialogFragment.show(fm, "fragment_add_task");
     }
 

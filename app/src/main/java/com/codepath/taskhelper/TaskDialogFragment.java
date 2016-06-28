@@ -16,7 +16,7 @@ import android.widget.RadioGroup;
 
 import java.util.Calendar;
 
-public class AddTaskDialogFragment extends DialogFragment {
+public class TaskDialogFragment extends DialogFragment {
     private EditText etBody;
     private Button btnAddTask;
     private RadioGroup radioGroupPriority;
@@ -24,12 +24,12 @@ public class AddTaskDialogFragment extends DialogFragment {
 
     OnTaskAddedListener listener;
 
-    public AddTaskDialogFragment() {}
+    public TaskDialogFragment() {}
 
-    public static AddTaskDialogFragment newInstance(@Nullable Task task, int pos) {
+    public static TaskDialogFragment newInstance(@Nullable Task task, int pos) {
         // If editing pass Task to be edited and its position, otherwise pass null and any int
 
-        AddTaskDialogFragment frag = new AddTaskDialogFragment();
+        TaskDialogFragment frag = new TaskDialogFragment();
         Bundle args = null;
         if (task != null) {
             args = new Bundle();
